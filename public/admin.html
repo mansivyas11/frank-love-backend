@@ -46,6 +46,7 @@
 <body>
   <h1>💘 Love Match Records</h1>
   <p class="note">Only visible to admins</p>
+
   <table id="matchesTable">
     <thead>
       <tr>
@@ -59,10 +60,9 @@
   </table>
 
   <script>
-    const PASSWORD = "admin123"; // Must match server.js
+    const PASSWORD = "admin123"; // Make sure this matches server.js
 
-    fetch(fetch("https://frank-love-backend-1.onrender.com/api/love/secrets", {
- {
+    fetch("https://frank-love-backend-1.onrender.com/api/love/secrets", {
       headers: {
         "Authorization": `Bearer ${PASSWORD}`
       }
@@ -73,16 +73,20 @@
     })
     .then(data => {
       const tbody = document.querySelector("#matchesTable tbody");
-      data.forEach(entry => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${entry.yourName}</td>
-          <td>${entry.crushName}</td>
-          <td>${entry.score}%</td>
-          <td>${new Date(entry.timestamp).toLocaleString()}</td>
-        `;
-        tbody.appendChild(row);
-      });
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4">No records found</td></tr>`;
+      } else {
+        data.forEach(entry => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${entry.yourName}</td>
+            <td>${entry.crushName}</td>
+            <td>${entry.score}%</td>
+            <td>${new Date(entry.timestamp).toLocaleString()}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      }
     })
     .catch(err => {
       alert("Access denied or error fetching records.");
