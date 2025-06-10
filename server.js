@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000;
 
 // ✅ CORS setup — allow deployed Vercel frontend
 app.use(cors({
-  origin: 'https://frank-love-frontend.vercel.app'  // ✅ UPDATED
+  origin: 'frank-love-frontend-l8bu.vercel.app'  // ✅ UPDATED
 }));
 
 // ✅ Middleware
