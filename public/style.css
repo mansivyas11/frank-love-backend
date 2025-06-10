@@ -1,0 +1,101 @@
+body {
+  background: linear-gradient(to right, #ffe6e6, #ffcccc);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Container */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: #fff0f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 60px;
+}
+
+/* Heading */
+.container h1 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+/* Input fields & button */
+input[type="text"], button {
+  width: 80%;
+  max-width: 300px;
+  padding: 12px;
+  margin: 10px auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  display: block;
+}
+
+button {
+  background-color: #ff4d4d;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+button:hover {
+  background-color: #e60000;
+}
+
+/* Result */
+#result {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+/* List of secrets */
+h3 {
+  margin-top: 30px;
+  font-size: 1.4rem;
+}
+
+#secretsList {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+#secretsList li {
+  background-color: #ffeaea;
+  margin: 5px auto;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+  font-size: 0.95rem;
+}
+
+/* Responsive for smaller devices */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 10px;
+  }
+
+  input[type="text"], button {
+    width: 90%;
+    font-size: 14px;
+  }
+
+  #result {
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Match Admin Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f2f4;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #c0392b;
+    }
+
+    table {
+      width: 80%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 20px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f7c6c7;
+      color: #333;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fdf2f2;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>💘 Love Match Records</h1>
+  <p class="note">Only visible to admins</p>
+  <table id="matchesTable">
+    <thead>
+      <tr>
+        <th>Your Name</th>
+        <th>Crush Name</th>
+        <th>Score</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const PASSWORD = "admin123"; // Must match server.js
+
+    fetch("https://frank-love-calculator-1.onrender.com/api/love/secrets", {
+      headers: {
+        "Authorization": `Bearer ${PASSWORD}`
+      }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Unauthorized or fetch failed");
+      return res.json();
+    })
+    .then(data => {
+      const tbody = document.querySelector("#matchesTable tbody");
+      data.forEach(entry => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${entry.yourName}</td>
+          <td>${entry.crushName}</td>
+          <td>${entry.score}%</td>
+          <td>${new Date(entry.timestamp).toLocaleString()}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    })
+    .catch(err => {
+      alert("Access denied or error fetching records.");
+      console.error(err);
+    });
+  </script>
+</body>
+</html>
